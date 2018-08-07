@@ -120,7 +120,6 @@ arrange(x, var1)
 arrange(x, desc(var1))
 
 ## exercise Genting Malaysia Berhad
-# url4 <- 'http://www.google.com/finance/historical?cid=146406397243039&startdate=Aug+4%2C+2012&enddate=Aug+3%2C+2017&num=30&ei=sbqCWaiVOozguQTz3IewAg&output=csv'
 url4 <- 'https://app.quotemedia.com/quotetools/getHistoryDownload.csv?&webmasterId=501&startDay=02&startMonth=02&startYear=2002&endDay=30&endMonth=07&endYear=2018&isRanged=false&symbol=GMALF'
 download.file(url4, destfile = './data/genting.csv')
 genting <- read.csv('./data/genting.csv')
