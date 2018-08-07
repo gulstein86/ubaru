@@ -268,3 +268,29 @@ as.data.table(DT)[,.(hist(y),z=log(v))]
 
 #calculate the mean for column y and group the result by even and odd rows
 DT[,mean(y),by=v%%2]
+
+#calculate the mean for column y and
+# group the result by even and odd rows
+DT[,mean(y),by=v%%2]
+
+library(datasets)
+irisDT <- data.table(iris)
+class(irisDT)
+irisDT
+
+#mean for Sepal.Width and group the results by Species
+irisDT[,mean(Sepal.Width),by=Species]
+
+tapply(irisDT$Sepal.Width)
+library(dplyr)
+irisDT %>% group_by(Species) %>% summarise(mean(Sepal.Width))
+
+# Determine the time to compute mean for Sepal.Length group by Species
+
+fileURL10<-"https://raw.githubusercontent.com/vincentarelbundock/Rdatasets/master/csv/datasets/iris.csv"
+download.file(fileURL10, destfile="./Data/iris.csv")
+irisDT <- fread("./Data/iris.csv")
+system.time(irisDT[,mean(Sepal.Length),by=Species])
+
+#Find the computation time for the followings:
+system.time(mean(irisDT$Sepal.Length,by=DT$Species))
