@@ -210,3 +210,14 @@ dt[grepl("Seksyen|Medan", dt$Location),]$Location
 dt[grep("^T(.*)1", dt$Location),"Location"]
 
 #hands-on
+#hands-on
+dt[grep(".*([Jj]alan)(.*)(Jaya)", dt$Location),"Location"]
+
+dt[grepl("[Tt][Mm][Nn]|[Tt]aman", dt$Location) & grepl("[Pp]etaling", dt$District),"Location"]
+
+kg_dt <- dt[(grepl("[Kk]g|[Kk]ampung", dt$Location) & grepl("[Ss]elangor", dt$State))|(grepl("[Kk]g|[Kk]ampung", dt$Location) & grepl("[Pp]erak", dt$State)),]
+kg_plot <- table(grepl("[Ss]elangor",kg_dt$State))
+barplot(kg_plot, names.arg=c("Perak","Selangor"), col=c("blue", "red"))
+
+nrow(dt[grepl("[Kk]g|[Kk]ampung", dt$Location) & grepl("[Ss]elangor", dt$State),])
+nrow(dt[grepl("[Kk]g|[Kk]ampung", dt$Location) & grepl("[Pp]erak", dt$State),])
