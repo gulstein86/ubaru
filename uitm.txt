@@ -262,7 +262,6 @@ DT$w
 DT[,plot(y,v)]
 DT[, for(x in 1:10) print(x)]
 
-is.data.table(DT)[,.(hist(y),z:=log(v))]
 names(DT)
 
 as.data.table(DT)[,.(hist(y),z=log(v))]
