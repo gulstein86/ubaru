@@ -131,3 +131,22 @@ genting %>% names #names(genting)
 genting %>% summarize(mean(Close)) #mean(genting$Close)
 genting %>% filter(Close>8.35) %>% nrow #nrow(genting[genting$Close>8.35,])
 
+#Merging data
+set.seed(1)
+x<- sample(1:20,10)
+y<- sample(30:50,10)
+dt.1 <- data.frame(x,y)
+
+set.seed(2)
+x<- sample(1:20,10)
+y<- sample(30:50,10)
+dt.2 <- data.frame(x,y)
+dt.1
+dt.2
+merge(dt.1, dt.2, by="x")
+merge(dt.1, dt.2, by="x", all =TRUE)
+merge(dt.1, dt.2, by=c("x","y"))
+
+#Merging Data: Hands-on
+df1<-data.frame(CustomerId = c(1:6),Product = c(rep("Honda", 3),rep("Chevrolet", 3)))
+df2<-data.frame(CustomerId = c(2, 4, 7),State =c("Selangor","Sarawak","Kelantan"))
