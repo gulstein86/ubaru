@@ -164,8 +164,49 @@ dt.split.1 <- split(denggi, denggi$Negeri)
 dt.split.2 <- split(denggi$`Jumlah Kes Terkumpul`, denggi$Negeri)
 
 lapply(dt.split.2, sum)
-tapply(denggi$'Jumlah Kes Terkumpul',denggi$Negeri, sum)
+tapply(dt$'Jumlah Kes Terkumpul',dt$'Daerah/Zon/PBT', sum)
 
+names(dt) <- gsub(".", "", names(dt),fixed=TRUE)
 names(dt)
-names(dt) <- gsub(" ", "", names(dt),fixed=TRUE)
 names(dt) <- gsub("/", "", names(dt),fixed=TRUE)
+
+names(dt) <- c("Year","Week","State","District","Location","Total","Outbreak Duration")
+names(dt)[2] <- 'Week No'
+
+names(dt)<-gsub(" ", "_", names(dt))
+
+dt$Location <-gsub("Lndah", "Indah",dt$Location)
+dt$Location <-gsub("Kg", "Kampung",dt$Location)
+dt$Location <-gsub("[kK]g", "Kampung",dt$Location)
+
+dt_Taman <- denggi[grepl("Taman", dt$Location),]
+str(dt_Taman)
+nrow(dt_Taman)
+
+#String split
+strsplit("hello Malaysia !", " ")
+paste('Hello,','Good','Morning')
+
+denggi$Location[[10]]
+strsplit(as.character(dt$Location), " ")[[10]]
+
+grep("Taman",dt$Location, value = TRUE)
+class(grep("Taman",dt$Location))
+grep("Kampung",dt$Location, value = TRUE)
+
+denggi$Location[[3266]]
+table(grepl("[Tt]aman",dt$Location)) #table function to categorise false true
+
+cnt<-table(grepl("Taman",dt$Location))
+barplot(cnt)
+
+nrow(dt[grepl("[Tt]aman|[Tt][Mm][Nn]", dt$Location),])
+nrow(dt[grepl("[Tt][Mm][Nn]", dt$Location),])
+dt_taman <- dt[grepl("[Tt][Mm][Nn]|[Tt]aman", dt$Location),]
+dt_taman <- dt[grepl("[Tt][Mm][Nn]|[Tt]aman", dt$Location),]
+
+dt[grepl("Seksyen|Medan", dt$Location),]$Location
+
+dt[grep("^T(.*)1", dt$Location),"Location"]
+
+#hands-on
