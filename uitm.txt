@@ -150,3 +150,11 @@ merge(dt.1, dt.2, by=c("x","y"))
 #Merging Data: Hands-on
 df1<-data.frame(CustomerId = c(1:6),Product = c(rep("Honda", 3),rep("Chevrolet", 3)))
 df2<-data.frame(CustomerId = c(2, 4, 7),State =c("Selangor","Sarawak","Kelantan"))
+
+merge(df1, df2, by='CustomerId')
+merge(df1, df2, by='CustomerId', all=TRUE)
+
+library(readxl)
+URL7<-"http://www.data.gov.my/data/dataset/b5cd948f-cffb-4439-ae08-e508ff073a93/resource/1f2d5629-ac8d-449a-a4c1-9d269d625d84/download/lokalitihotspot2015.xlsx"
+download.file(URL7, destfile = "./data/dengue.xlsx",mode='wb')
+denggi <- read_excel('./data/dengue.xlsx')
