@@ -221,3 +221,51 @@ barplot(kg_plot, names.arg=c("Perak","Selangor"), col=c("blue", "red"))
 
 nrow(dt[grepl("[Kk]g|[Kk]ampung", dt$Location) & grepl("[Ss]elangor", dt$State),])
 nrow(dt[grepl("[Kk]g|[Kk]ampung", dt$Location) & grepl("[Pp]erak", dt$State),])
+
+#data.table package
+install.packages('data.table')
+library(data.table)
+DF <- data.frame(x=rep(c("a","b","c"),each=3),y=c(1,3,6), v=1:9)
+
+DT <- data.table(x=rep(c("a","b","c"),each=3),y=c(1,3,6), v=1:9)
+
+#check class
+class(DT)
+class(DF)
+
+#subset row 3:5
+DF[3:5,]
+DT[3:5]
+
+#Show all the records where x==a
+DF[DF$x=='a',]
+DT[DT$x=='a']
+
+#Show all the records for row 1,3,7
+DF[c(1,3,7),]
+DT[c(1,3,7)]
+
+DT[,list(mean(y),sum(v))]
+DT[,.(length(x),sum(y))]
+
+#Find the max for column y and mean for column v
+DT[,.(max(y),mean(v))]
+
+#Find the square root of column y and store in column w, show all the elements in w
+DT$w <- DT[,.(sqrt(y))] #DT[,w:=(y)^.5]
+DT$w
+
+#Find the mean of column v and store in column w
+DT$w <-DT[,.(mean(v)),] #DT[,w:=mean(v)]
+DT$w
+
+DT[,plot(y,v)]
+DT[, for(x in 1:10) print(x)]
+
+is.data.table(DT)[,.(hist(y),z:=log(v))]
+names(DT)
+
+as.data.table(DT)[,.(hist(y),z=log(v))]
+
+#calculate the mean for column y and group the result by even and odd rows
+DT[,mean(y),by=v%%2]
